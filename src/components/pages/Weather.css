@@ -1,0 +1,454 @@
+.weather-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(to bottom, rgba(220, 241, 220, 0.9), rgba(236, 245, 236, 0.7));
+  min-height: calc(100vh - 80px);
+}
+
+.weather-container h1 {
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px 0;
+  position: relative;
+  background: linear-gradient(135deg, #2c5530 0%, #4CAF50 100%);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(44, 85, 48, 0.15);
+}
+
+.weather-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.7));
+  border-radius: 2px;
+}
+
+.forecast-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 15px;
+}
+
+.weather-card {
+  background: linear-gradient(135deg, #3a7d44 0%, #4CAF50 100%);
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(44, 85, 48, 0.15);
+}
+
+.weather-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateY(-100%);
+  transition: transform 0.6s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(44, 85, 48, 0.2);
+}
+
+.weather-card:hover::before {
+  transform: translateY(100%);
+}
+
+.weather-date {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.weather-icon {
+  margin: 0;
+}
+
+.weather-icon img {
+  width: 60px;
+  height: 60px;
+  transition: transform 0.3s ease;
+}
+
+.weather-card:hover .weather-icon img {
+  transform: scale(1.1);
+}
+
+.weather-temp {
+  text-align: center;
+  margin: 20px 0;
+  padding: 15px 0;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.temp-main {
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, #ffffff, #e8f5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feels-like {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+}
+
+.weather-description {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 20px 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.weather-details {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.95rem;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.detail-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.detail-label::before {
+  content: '•';
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.detail-value {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.weather-loading {
+  text-align: center;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.loading-spinner {
+  border: 4px solid rgba(44, 85, 48, 0.1);
+  border-left-color: #4CAF50;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+.weather-loading p {
+  color: #2c5530;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.weather-error {
+  text-align: center;
+  padding: 40px;
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(220, 53, 69, 0.1);
+  margin: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Add weather icons for different detail types */
+.detail-label[data-type="humidity"]::before {
+  content: '💧';
+}
+
+.detail-label[data-type="wind"]::before {
+  content: '🌪️';
+}
+
+.detail-label[data-type="pressure"]::before {
+  content: '🌡️';
+}
+
+.plant-recommendations {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.plant-recommendations h4 {
+  color: white;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  text-align: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.recommended-plants {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.plant-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.plant-icon {
+  font-size: 1.1rem;
+}
+
+.plant-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .weather-container {
+    padding: 15px;
+  }
+
+  .weather-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+
+  .forecast-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 10px;
+  }
+
+  .weather-card {
+    max-width: 250px;
+  }
+
+  .temp-main {
+    font-size: 2.2rem;
+  }
+
+  .recommended-plants {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Plant Guide Section */
+.plant-guide-section {
+  margin-top: 40px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(44, 85, 48, 0.1);
+}
+
+.plant-guide-section h2 {
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  position: relative;
+  padding: 20px;
+  background: linear-gradient(135deg, #2c5530 0%, #4CAF50 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(44, 85, 48, 0.15);
+}
+
+.plant-guide-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.7));
+  border-radius: 2px;
+}
+
+.plant-recommendations-grid {
+  display: grid;
+  gap: 30px;
+}
+
+.day-recommendations {
+  background: rgba(236, 245, 236, 0.8);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(44, 85, 48, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.day-recommendations h3 {
+  color: #2c5530;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.temp-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 8px 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+  width: fit-content;
+}
+
+.temp-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c5530;
+}
+
+.temp-label {
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: rgba(76, 175, 80, 0.1);
+  color: #2c5530;
+}
+
+.plants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.plant-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(44, 85, 48, 0.1);
+}
+
+.plant-card:hover {
+  background: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(44, 85, 48, 0.15);
+}
+
+.plant-icon {
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plant-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.plant-name {
+  font-weight: 600;
+  color: #2c5530;
+}
+
+.plant-care {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .plant-guide-section {
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+  .plant-guide-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .plants-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plant-card {
+    padding: 12px;
+  }
+} 
